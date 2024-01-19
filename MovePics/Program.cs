@@ -33,9 +33,9 @@ namespace MovePics
         }
         static void Main(string[] args)
         {
-            var folder = @"C:\Users\chris\Dropbox\Camera Uploads";
-            DirectoryInfo d = new DirectoryInfo(folder);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.*"); //Getting Text files
+            var folder = @"C:\Dropbox\Camera Uploads";
+            DirectoryInfo d = new DirectoryInfo(folder);
+            FileInfo[] Files = d.GetFiles("*.*");
             foreach (FileInfo file in Files)
             {
                 var fd = GetDateTakenFromImage(file.FullName);
@@ -46,7 +46,7 @@ namespace MovePics
                 if (fd != null)
                 {
                     string inFolder = Path.Combine(folder, ((DateTime)fd).ToString("yyyy-MM"));
-                    Console.WriteLine(inFolder);
+                    Console.WriteLine($"Moving {file.Name} to {inFolder}");
                     Directory.CreateDirectory(inFolder);
                     file.MoveTo(Path.Combine(inFolder, file.Name));
                 }
